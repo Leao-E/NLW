@@ -1,16 +1,14 @@
 import express from 'express';
+import routes from './routes';
+import cors from 'cors';
 
 const app = express();
 const router = express.Router();
 
 //used to convert the request body to a json
+app.use(cors());
 app.use(express.json());
-
-app.get('/', (req, res) => {
-  return res.json({
-    "teste": "teste"
-  });
-});
+app.use(routes)
 
 var port = 3030;
 
