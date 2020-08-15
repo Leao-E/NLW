@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontFamily: 'PopPoppins_400Regular',
+    fontFamily: 'Poppins_400Regular',
     color: "#fff",
     fontSize: 20,
     lineHeight: 30,
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontFamily: "Archivo_700Bold",
     color: '#fff',
-    fontSize: 20
+    fontSize: 18
   },
 
   totalConnection: {
