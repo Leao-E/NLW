@@ -31,21 +31,21 @@ function StudyTabs () {
           marginLeft: 16,
         },
         inactiveBackgroundColor: '#fafafc',
-        activeBackgroundColor: '#ebebef5',
+        activeBackgroundColor: '#e3e3e8',
         inactiveTintColor: '#c1bccc',
         activeTintColor: '#32264d',
       }}
     >
     <Screen name="TeacherList" component={TeacherList} options={{
       tabBarLabel: 'Proffys',
-      tabBarIcon: ({color, size}) => {
-        return <Ionicons name="ios-easel" color={color} size={size}/>
+      tabBarIcon: ({color, size, focused}) => {
+        return <Ionicons name="ios-easel" color={focused ? '#8257e5' : color} size={size}/>
       }
     }} />
     <Screen name="Favorites" component={Favorites} options={{
       tabBarLabel: 'Favoritos',
-      tabBarIcon: ({color, size}) => {
-        return <Ionicons name="ios-heart" color={color} size={size}/>
+      tabBarIcon: ({color, size, focused}) => {
+        return <Ionicons name="ios-heart" color={focused ? '#8257e5' : color} size={size}/>
       }
     }} />
   </Navigator>
