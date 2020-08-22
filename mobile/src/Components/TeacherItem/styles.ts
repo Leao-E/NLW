@@ -1,5 +1,8 @@
 import { StyleSheet } from "react-native";
 
+import nomalize from "react-native-normalize";
+import normalize from "react-native-normalize";
+
 const styles = StyleSheet.create({
   container:{
     backgroundColor: '#FFF',
@@ -93,10 +96,14 @@ const styles = StyleSheet.create({
     marginRight: 8
   },
 
+  favorited: {
+    backgroundColor: "#e33d3d"
+  },
+
   contactButtonText: {
     color: '#fff',
     fontFamily: 'Archivo_700Bold',
-    fontSize: 16,
+    fontSize: normalize(16),
     marginLeft: 16
   }
 });
