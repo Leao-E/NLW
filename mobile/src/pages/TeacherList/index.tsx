@@ -9,17 +9,24 @@ import styles from './styles';
 function TeacherList (){
   return (
     <View style={styles.container} >
-      <PageHeader title={'Proffys disponíveis'}/>
-      <ScrollView>
-        <TeacherItem />
-        <TeacherItem />
-        <TeacherItem />
-        <TeacherItem />
-        <TeacherItem />
-        <TeacherItem />
-        <TeacherItem />
-        <TeacherItem />
-      </ScrollView>
+      <PageHeader title={'Proffys disponíveis'}/>      
+        <ScrollView
+          style={styles.teacherList}
+
+          contentContainerStyle={{        
+            paddingBottom: 24,          
+            paddingHorizontal: 14                        
+          }}                      
+        >
+          <TeacherItem />
+          <TeacherItem />
+          <TeacherItem />
+          <TeacherItem />
+          <TeacherItem />
+          <TeacherItem />
+          <TeacherItem />
+          <TeacherItem />
+        </ScrollView>      
     </View>
   );
 }
