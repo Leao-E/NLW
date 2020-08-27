@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { View, Image, Text } from 'react-native';
 import Br from '../Utils/Br';
@@ -11,6 +11,15 @@ import whatsappIcon from '../../assets/images/icons/whatsapp.png';
 import styles from './styles';
 
 function TeacherItem () {
+
+  function handleFavoriteButton(){
+    setIsFavorited(!isFavorited);
+  }
+
+  const classPrice = (Math.random() * 100);
+
+  const [ isFavorited, setIsFavorited ] = useState(false);  
+
   return (
     <View style={styles.container}>
       <View style={styles.profile}>
@@ -32,13 +41,19 @@ function TeacherItem () {
       <View style={styles.footer}>
         <Text style={styles.price}>
           Preço/hora{'   '}
-          <Text style={styles.priceValue}>R$ 20,00</Text>
+          <Text style={styles.priceValue}>R$ {classPrice.toFixed(2)}</Text>
         </Text>
 
         <View style={styles.buttonsContainer}>
-          <RectButton style={[styles.favoriteButton, styles.favorited]}>
-            {/*<Image source={heartOutlineIcon} />*/}
-            <Image source={unfavoriteIcon} />
+          <RectButton style={isFavorited
+            ? [styles.favoriteButton, styles.favorited]
+            : [styles.favoriteButton]}
+            onPress={handleFavoriteButton}
+          >
+            {isFavorited  
+              ? <Image source={unfavoriteIcon} />
+              : <Image source={heartOutlineIcon} />
+            }                
           </RectButton>
           <RectButton style={styles.contactButton}>
             <Image source={whatsappIcon} />
