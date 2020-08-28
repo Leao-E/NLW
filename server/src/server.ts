@@ -10,6 +10,6 @@ app.use(cors());
 app.use(express.json());
 app.use(routes)
 
-var port = 3030;
+var port = 3333;
 
 app.listen(port);
