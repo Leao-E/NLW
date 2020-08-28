@@ -59,7 +59,7 @@ function TeacherList (){
             </View>
             <RectButton style={styles.submitButton}>
               <Text style={styles.submitButtonText}>
-                
+                Filtrar
               </Text>
             </RectButton>
           </View>                  
