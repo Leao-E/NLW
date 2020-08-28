@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { View, ScrollView, Text, TextInput, LayoutAnimation, Platform, UIManager } from 'react-native';
+import { BorderlessButton, RectButton } from 'react-native-gesture-handler';
+import { Feather } from '@expo/vector-icons';
 
 import PageHeader from '../../Components/PageHeader';
-import TeacherItem from '../../Components/TeacherItem';
+import TeacherItem, { Teacher } from '../../Components/TeacherItem';
+
+import api from '../../services/api';
 
 import styles from './styles';
-import { BorderlessButton, RectButton } from 'react-native-gesture-handler';
-
-import { Feather } from '@expo/vector-icons'
 
 function TeacherList (){
 
@@ -15,24 +16,46 @@ function TeacherList (){
     UIManager.setLayoutAnimationEnabledExperimental(true);
   }
 
+  const [teachers, setTeachers] = useState([]);
+
   const [isFiltersVisible, setIsFilterVisible] = useState(false);
 
   const [weekDay, setWeekDay] = useState('');
   const [subject, setSubject] = useState('');
   const [time, setTime] = useState('');
 
+  function animation(){
+    LayoutAnimation.configureNext(
+      LayoutAnimation.create(
+        150,
+        LayoutAnimation.Types.easeOut,
+        LayoutAnimation.Properties.opacity,
+      ));
+  }
+
   function handleToggleIsFilterVisible() {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    //LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    animation();
     setIsFilterVisible(!isFiltersVisible);
   }
 
-  function handleFilterSubmit (){
-    console.log([
-      subject,
-      weekDay,
-      time,
-    ]);
+  async function handleFilterSubmit (){
+    const params = {
+      subject: subject,
+        week_day: weekDay,
+        time: time,
+    }
     
+    const response = await api.get('classes', {
+      params: params,
+    });
+    
+    animation();
+
+    setIsFilterVisible(false);
+    console.log(response.data);
+    
+    setTeachers(response.data);        
   }
 
   return (
@@ -96,14 +119,13 @@ function TeacherList (){
             paddingHorizontal: 14                        
           }}                      
         >
-          <TeacherItem />
-          <TeacherItem />
-          <TeacherItem />
-          <TeacherItem />
-          <TeacherItem />
-          <TeacherItem />
-          <TeacherItem />
-          <TeacherItem />
+          {teachers.map((teacher: Teacher) => {
+            return (
+              <TeacherItem 
+                key={teacher.id} 
+                teacher={teacher} 
+              />
+            )})}      
         </ScrollView>      
     </View>
   );
