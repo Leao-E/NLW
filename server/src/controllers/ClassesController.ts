@@ -18,10 +18,10 @@ export default class ClassesController {
         error: 'Missing filters to search classes'
       });
     }
-
-    let subject: string = filters.subject.toString();
-    let week_day: string = filters.week_day.toString();
-    let time: string = filters.time.toString();
+    
+    let subject: string = filters.subject.toString().trim();
+    let week_day: string = filters.week_day.toString().trim();
+    let time: string = filters.time.toString().trim();
 
     const timeInMinutes = convertHoursToMinutes(time);
 
