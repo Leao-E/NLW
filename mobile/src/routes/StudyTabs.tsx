@@ -10,6 +10,7 @@ function StudyTabs () {
   return (
     <Navigator
       tabBarOptions={{
+        keyboardHidesTabBar: true,    
         style: {
           elevation: 0,
           shadowOpacity: 0,
