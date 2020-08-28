@@ -10,16 +10,30 @@ import { BorderlessButton, RectButton } from 'react-native-gesture-handler';
 import { Feather } from '@expo/vector-icons'
 
 function TeacherList (){
+
   if (Platform.OS === 'android') {
     UIManager.setLayoutAnimationEnabledExperimental(true);
   }
+
   const [isFiltersVisible, setIsFilterVisible] = useState(false);
+
+  const [weekDay, setWeekDay] = useState('');
+  const [subject, setSubject] = useState('');
+  const [time, setTime] = useState('');
 
   function handleToggleIsFilterVisible() {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     setIsFilterVisible(!isFiltersVisible);
   }
 
+  function handleFilterSubmit (){
+    console.log([
+      subject,
+      weekDay,
+      time,
+    ]);
+    
+  }
 
   return (
     <View style={styles.container} >
@@ -35,6 +49,8 @@ function TeacherList (){
           <View style={styles.searchForm}>        
             <Text style={styles.label}>Matéria</Text>
             <TextInput 
+              onChangeText={text => setSubject(text)}
+              value={subject}
               placeholderTextColor="#c1bccc"
               style={styles.input}
               placeholder="Seleciona a matéria"
@@ -43,6 +59,8 @@ function TeacherList (){
               <View style={styles.inputBlock}>
                 <Text style={styles.label}>Dia da semana</Text>
                 <TextInput
+                  onChangeText={text => setWeekDay(text)}
+                  value={weekDay}
                   placeholderTextColor="#c1bccc"
                   style={styles.input}
                   placeholder="Selecione o dia"
@@ -51,13 +69,18 @@ function TeacherList (){
               <View style={styles.inputBlock}>
                 <Text style={styles.label}>Horário</Text>
                 <TextInput
+                  onChangeText={text => setTime(text)}
+                  value={time}
                   placeholderTextColor="#c1bccc" 
                   style={styles.input}
                   placeholder="Selecione horário"
                 />
               </View>
             </View>
-            <RectButton style={styles.submitButton}>
+            <RectButton 
+              style={styles.submitButton}
+              onPress={handleFilterSubmit}
+            >
               <Text style={styles.submitButtonText}>
                 Filtrar
               </Text>
