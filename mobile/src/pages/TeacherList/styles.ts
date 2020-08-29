@@ -8,7 +8,11 @@ const styles = StyleSheet.create({
   },
 
   teacherList: {
-    marginTop: -40              
+    overflow: "hidden",
+    marginHorizontal: 14,
+    marginTop: -40,
+    borderRadius: 7,    
+    paddingBottom: 280,                
   },
 
   searchForm: {

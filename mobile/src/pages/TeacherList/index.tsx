@@ -16,6 +16,16 @@ function TeacherList (){
     UIManager.setLayoutAnimationEnabledExperimental(true);
   }
 
+  const t: Teacher = {
+    avatar: 'https://avatars1.githubusercontent.com/u/42789344?s=460&u=3a1a13a37fcb2d167d1074fad580c8035891f43a&v=4',
+    bio: 'eeeeeeeeeeeeeeeeeeeeeeeeeeeee',
+    cost: 20,
+    id: 2,
+    name: 'EEEEEEEEEEEEEEEEEEE',
+    subject: "fefefefe",
+    whatsapp: '343423242',
+  }
+
   const [teachers, setTeachers] = useState([]);
 
   const [isFiltersVisible, setIsFilterVisible] = useState(false);
@@ -111,22 +121,77 @@ function TeacherList (){
           </View>                  
         )}  
       </PageHeader>
-        <ScrollView
-          style={styles.teacherList}
-
-          contentContainerStyle={{        
-            paddingBottom: 24,          
-            paddingHorizontal: 14                        
-          }}                      
-        >
-          {teachers.map((teacher: Teacher) => {
-            return (
+        <View style={styles.teacherList}>
+          <ScrollView>        
+            {teachers.map((teacher: Teacher) =>{
               <TeacherItem 
                 key={teacher.id} 
-                teacher={teacher} 
+                teacher={teacher}
               />
-            )})}      
+            })}
+            <TeacherItem                           
+              teacher={t} 
+            />
+            <TeacherItem                           
+              teacher={t} 
+            />
+            <TeacherItem                           
+              teacher={t} 
+            />
+            <TeacherItem                           
+              teacher={t} 
+            />
+            <TeacherItem                           
+              teacher={t} 
+            />
+            <TeacherItem                           
+              teacher={t} 
+            />
+            <TeacherItem                           
+              teacher={t} 
+            />
+            <TeacherItem                           
+              teacher={t} 
+            />
+            <TeacherItem                           
+              teacher={t} 
+            />
+            <TeacherItem                           
+              teacher={t} 
+            />
+            <TeacherItem                           
+              teacher={t} 
+            />
+            <TeacherItem                           
+              teacher={t} 
+            />
+            <TeacherItem                           
+              teacher={t} 
+            />
+            <TeacherItem                           
+              teacher={t} 
+            />
+            <TeacherItem                           
+              teacher={t} 
+            />
+            <TeacherItem                           
+              teacher={t} 
+            />
+            <TeacherItem                           
+              teacher={t} 
+            />
+            <TeacherItem                           
+              teacher={t} 
+            />
+            <TeacherItem                           
+              teacher={t} 
+            />
+            <TeacherItem                           
+              teacher={t} 
+            />      
+
         </ScrollView>      
+        </View>      
     </View>
   );
 }
