@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, ScrollView, Text, TextInput, LayoutAnimation, Platform, UIManager } from 'react-native';
 import { BorderlessButton, RectButton } from 'react-native-gesture-handler';
 import { Feather } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import PageHeader from '../../Components/PageHeader';
 import TeacherItem, { Teacher } from '../../Components/TeacherItem';
@@ -17,7 +18,7 @@ function TeacherList (){
   }
 
   const [teachers, setTeachers] = useState([]);
-
+  const [favorites, setFavorites] = useState <number[]> ([]);
   const [isFiltersVisible, setIsFilterVisible] = useState(false);
 
   const [weekDay, setWeekDay] = useState('');
@@ -33,6 +34,18 @@ function TeacherList (){
       ));
   }
 
+  function loadFavorites() {
+    AsyncStorage.getItem('favorites').then(res => {
+      if (res){
+        const favoritedTeachers = JSON.parse(res);
+        const favoritedTeachersIds = favoritedTeachers.map((teacher: Teacher) => {
+          return teacher.id;
+        });
+        setFavorites(favoritedTeachersIds);
+      }
+    });
+  }
+
   function handleToggleIsFilterVisible() {
     //LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     animation();
@@ -40,22 +53,28 @@ function TeacherList (){
   }
 
   async function handleFilterSubmit (){
+    loadFavorites()
+    
     const params = {
       subject: subject,
         week_day: weekDay,
         time: time,
     }
+  
+    try {
+      const response = await api.get('classes', {
+        params: params,
+      });    
     
-    const response = await api.get('classes', {
-      params: params,
-    });
-    
+      setTeachers(response.data);        
+
+    } catch (error) {
+      console.log(error);      
+    }
+      
     animation();
 
-    setIsFilterVisible(false);
-    console.log(response.data);
-    
-    setTeachers(response.data);        
+    setIsFilterVisible(false);  
   }
 
   return (
@@ -124,6 +143,7 @@ function TeacherList (){
               <TeacherItem 
                 key={teacher.id} 
                 teacher={teacher} 
+                favorited={favorites.includes(teacher.id)}
               />
             )})}      
         </ScrollView>      

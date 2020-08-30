@@ -5,10 +5,20 @@ import PageHeader from '../../Components/PageHeader';
 import TeacherItem, { Teacher } from '../../Components/TeacherItem';
 
 import styles from './styles';
+import AsyncStorage from '@react-native-community/async-storage';
+import { useFocusEffect } from '@react-navigation/native';
 
 function Favorites (){
 
-  const [favoriteTeachers, setFavoriteTeachers] = useState ([]);
+  const [favorites, setFavorites] = useState<Teacher[]>([]);
+
+  useFocusEffect(() => {
+    AsyncStorage.getItem('favorites').then(res => {
+      if (res){      
+        setFavorites(JSON.parse(res));
+      }
+    });
+  });
 
   return (
     <View style={styles.container} >
@@ -21,11 +31,14 @@ function Favorites (){
             paddingHorizontal: 14                        
           }}                      
         >
-          {favoriteTeachers.map((teacher: Teacher) => {
-            <TeacherItem 
-              key={teacher.id}
-              teacher={teacher}
-            />
+          {favorites.map((teacher: Teacher) => {
+            return (
+              <TeacherItem 
+                key={teacher.id}
+                teacher={teacher}
+                favorited={true}
+              />
+            )          
           })}        
         </ScrollView> 
     </View>
